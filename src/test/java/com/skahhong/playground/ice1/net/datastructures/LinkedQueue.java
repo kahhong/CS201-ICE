@@ -20,10 +20,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.skahhong.playground.datastructures;
+package com.skahhong.playground.ice1.net.datastructures;
 
 /**
- * Realization of a stack as an adaptation of a SinglyLinkedList.
+ * Realization of a FIFO queue as an adaptation of a SinglyLinkedList.
  * All operations are performed in constant time.
  *
  * @author Michael T. Goodrich
@@ -31,61 +31,53 @@ package com.skahhong.playground.datastructures;
  * @author Michael H. Goldwasser
  * @see SinglyLinkedList
  */
-public class LinkedStack<E> implements Stack<E> {
+public class LinkedQueue<E> implements Queue<E> {
 
-  /** The primary storage for elements of the stack */
-  private SinglyLinkedList<E> list = new SinglyLinkedList<>();   // an empty list
+  /** The primary storage for elements of the queue */
+  private SinglyLinkedList<E> list = new SinglyLinkedList<>();   // an empty  list
 
-  /** Constructs an initially empty stack. */
-  public LinkedStack() { }                   // new stack relies on the initially empty list
+  /** Constructs an initially empty queue. */
+  public LinkedQueue() { }                  // new queue relies on the initially empty list
 
   /**
-   * Returns the number of elements in the stack.
-   * @return number of elements in the stack
+   * Returns the number of elements in the queue.
+   * @return number of elements in the queue
    */
   @Override
   public int size() { return list.size(); }
 
   /**
-   * Tests whether the stack is empty.
-   * @return true if the stack is empty, false otherwise
+   * Tests whether the queue is empty.
+   * @return true if the queue is empty, false otherwise
    */
   @Override
   public boolean isEmpty() { return list.isEmpty(); }
 
   /**
-   * Inserts an element at the top of the stack.
-   * @param element   the element to be inserted
+   * Inserts an element at the rear of the queue.
+   * @param element  the element to be inserted
    */
   @Override
-  public void push(E element) { list.addFirst(element); }
+  public void enqueue(E element) { list.addLast(element); }
 
   /**
-   * Returns, but does not remove, the element at the top of the stack.
-   * @return top element in the stack (or null if empty)
+   * Returns, but does not remove, the first element of the queue.
+   * @return the first element of the queue (or null if empty)
    */
   @Override
-  public E top() { return list.first(); }
+  public E first() { return list.first(); }
 
   /**
-   * Removes and returns the top element from the stack.
+   * Removes and returns the first element of the queue.
    * @return element removed (or null if empty)
    */
   @Override
-  public E pop() { return list.removeFirst(); }
+  public E dequeue() { return list.removeFirst(); }
 
-  /** Produces a string representation of the contents of the stack.
-   *  (ordered from top to bottom)
-   *
-   * This exists for debugging purposes only.
-   *
-   * @return textual representation of the stack
+  /** Produces a string representation of the contents of the queue.
+   *  (from front to back). This exists for debugging purposes only.
    */
   public String toString() {
     return list.toString();
-  }
-
-  public static void main(String[] args){
-      System.out.println();
   }
 }

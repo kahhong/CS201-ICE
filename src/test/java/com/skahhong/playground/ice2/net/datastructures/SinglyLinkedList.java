@@ -20,28 +20,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.skahhong.playground.datastructures;
+package com.skahhong.playground.ice2.net.datastructures;
 
 /**
- * An implementation of a circularly linked list.
+ * A basic singly linked list implementation.
  *
  * @author Michael T. Goodrich
  * @author Roberto Tamassia
  * @author Michael H. Goldwasser
  */
-public class CircularlyLinkedList<E> {
+public class SinglyLinkedList<E> implements Cloneable {
   //---------------- nested Node class ----------------
   /**
-   * Singly linked node, which stores a reference to its element and
-   * to the subsequent node in the list.
+   * Node of a singly linked list, which stores a reference to its
+   * element and to the subsequent node in the list (or null if this
+   * is the last node).
    */
   private static class Node<E> {
 
     /** The element stored at this node */
-    private E element;     // an element stored at this node
+    private E element;            // reference to the element stored at this node
 
     /** A reference to the subsequent node in the list */
-    private Node<E> next;  // a reference to the subsequent node in the list
+    private Node<E> next;         // reference to the subsequent node in the list
 
     /**
      * Creates a node with the given element and next node.
@@ -75,15 +76,18 @@ public class CircularlyLinkedList<E> {
     public void setNext(Node<E> n) { next = n; }
   } //----------- end of nested Node class -----------
 
-  // instance variables of the CircularlyLinkedList
-  /** The designated cursor of the list */
-  private Node<E> tail = null;                  // we store tail (but not head)
+  // instance variables of the SinglyLinkedList
+  /** The head node of the list */
+  private Node<E> head = null;               // head node of the list (or null if empty)
+
+  /** The last node of the list */
+  private Node<E> tail = null;               // last node of the list (or null if empty)
 
   /** Number of nodes in the list */
-  private int size = 0;                         // number of nodes in the list
+  private int size = 0;                      // number of nodes in the list
 
   /** Constructs an initially empty list. */
-  public CircularlyLinkedList() { }             // constructs an initially empty list
+  public SinglyLinkedList() { }              // constructs an initially empty list
 
   // access methods
   /**
@@ -91,23 +95,6 @@ public class CircularlyLinkedList<E> {
    * @return number of elements in the linked list
    */
   public int size() { return size; }
-
-  public int getSize() {
-
-    if(tail == null) {
-      return 0;
-    }
-
-    int count = 1;
-    Node<E> walk = tail.getNext();
-
-    while(walk != tail) {
-      count++;
-      walk = walk.getNext();
-    }
-
-    return count;
-  }
 
   /**
    * Tests whether the linked list is empty.
@@ -121,12 +108,12 @@ public class CircularlyLinkedList<E> {
    */
   public E first() {             // returns (but does not remove) the first element
     if (isEmpty()) return null;
-    return tail.getNext().getElement();         // the head is *after* the tail
+    return head.getElement();
   }
 
   /**
-   * Returns (but does not remove) the last element of the list
-   * @return element at the back of the list (or null if empty)
+   * Returns (but does not remove) the last element of the list.
+   * @return element at the end of the list (or null if empty)
    */
   public E last() {              // returns (but does not remove) the last element
     if (isEmpty()) return null;
@@ -135,25 +122,13 @@ public class CircularlyLinkedList<E> {
 
   // update methods
   /**
-   * Rotate the first element to the back of the list.
-   */
-  public void rotate() {         // rotate the first element to the back of the list
-    if (tail != null)                // if empty, do nothing
-      tail = tail.getNext();         // the old head becomes the new tail
-  }
-
-  /**
    * Adds an element to the front of the list.
    * @param e  the new element to add
    */
   public void addFirst(E e) {                // adds element e to the front of the list
-    if (size == 0) {
-      tail = new Node<>(e, null);
-      tail.setNext(tail);                     // link to itself circularly
-    } else {
-      Node<E> newest = new Node<>(e, tail.getNext());
-      tail.setNext(newest);
-    }
+    head = new Node<>(e, head);              // create and link a new node
+    if (size == 0)
+      tail = head;                           // special case: new node becomes tail also
     size++;
   }
 
@@ -162,8 +137,13 @@ public class CircularlyLinkedList<E> {
    * @param e  the new element to add
    */
   public void addLast(E e) {                 // adds element e to the end of the list
-    addFirst(e);             // insert new element at front of list
-    tail = tail.getNext();   // now new element becomes the tail
+    Node<E> newest = new Node<>(e, null);    // node will eventually be the tail
+    if (isEmpty())
+      head = newest;                         // special case: previously empty list
+    else
+      tail.setNext(newest);                  // new node after existing tail
+    tail = newest;                           // new node becomes the tail
+    size++;
   }
 
   /**
@@ -172,11 +152,55 @@ public class CircularlyLinkedList<E> {
    */
   public E removeFirst() {                   // removes and returns the first element
     if (isEmpty()) return null;              // nothing to remove
-    Node<E> head = tail.getNext();
-    if (head == tail) tail = null;           // must be the only node left
-    else tail.setNext(head.getNext());       // removes "head" from the list
+    E answer = head.getElement();
+    head = head.getNext();                   // will become null if list had only one node
     size--;
-    return head.getElement();
+    if (size == 0)
+      tail = null;                           // special case as list is now empty
+    return answer;
+  }
+
+  @SuppressWarnings({"unchecked"})
+  public boolean equals(Object o) {
+    if (o == null) return false;
+    if (getClass() != o.getClass()) return false;
+    SinglyLinkedList other = (SinglyLinkedList) o;   // use nonparameterized type
+    if (size != other.size) return false;
+    Node walkA = head;                               // traverse the primary list
+    Node walkB = other.head;                         // traverse the secondary list
+    while (walkA != null) {
+      if (!walkA.getElement().equals(walkB.getElement())) return false; //mismatch
+      walkA = walkA.getNext();
+      walkB = walkB.getNext();
+    }
+    return true;   // if we reach this, everything matched successfully
+  }
+
+  @SuppressWarnings({"unchecked"})
+  public SinglyLinkedList<E> clone() throws CloneNotSupportedException {
+    // always use inherited Object.clone() to create the initial copy
+    SinglyLinkedList<E> other = (SinglyLinkedList<E>) super.clone(); // safe cast
+    if (size > 0) {                    // we need independent chain of nodes
+      other.head = new Node<>(head.getElement(), null);
+      Node<E> walk = head.getNext();      // walk through remainder of original list
+      Node<E> otherTail = other.head;     // remember most recently created node
+      while (walk != null) {              // make a new node storing same element
+        Node<E> newest = new Node<>(walk.getElement(), null);
+        otherTail.setNext(newest);     // link previous node to this one
+        otherTail = newest;
+        walk = walk.getNext();
+      }
+    }
+    return other;
+  }
+
+  public int hashCode() {
+    int h = 0;
+    for (Node walk=head; walk != null; walk = walk.getNext()) {
+      h ^= walk.getElement().hashCode();      // bitwise exclusive-or with element's code
+      h = (h << 5) | (h >>> 27);              // 5-bit cyclic shift of composite code
+    }
+    return h;
   }
 
   /**
@@ -184,35 +208,15 @@ public class CircularlyLinkedList<E> {
    * This exists for debugging purposes only.
    */
   public String toString() {
-    if (tail == null) return "()";
     StringBuilder sb = new StringBuilder("(");
-    Node<E> walk = tail;
-    do {
-      walk = walk.getNext();
+    Node<E> walk = head;
+    while (walk != null) {
       sb.append(walk.getElement());
       if (walk != tail)
         sb.append(", ");
-    } while (walk != tail);
+      walk = walk.getNext();
+    }
     sb.append(")");
     return sb.toString();
-  }
-
-  public static void main(String[] args){
-
-    CircularlyLinkedList<Integer> myList = new CircularlyLinkedList<Integer>();
-
-    myList.addLast(1);
-    System.out.println(myList);
-    System.out.println(myList.getSize());
-
-    myList.addLast(2);
-    System.out.println(myList);
-    System.out.println(myList.getSize());
-
-    myList.addLast(3);
-    System.out.println(myList);
-    System.out.println(myList.getSize());
-
-    System.out.println(myList.size());
   }
 }

@@ -20,11 +20,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.skahhong.playground.dsaj;
+package com.skahhong.playground.ice2.dsaj.stacks;
 
 import java.util.Scanner;
-import com.skahhong.playground.datastructures.Stack;
-import com.skahhong.playground.datastructures.LinkedStack;
+import com.skahhong.playground.ice1.net.datastructures.Stack;
+import com.skahhong.playground.ice1.net.datastructures.LinkedStack;
 
 /** Simplified test of matching tags in an HTML document. */
 public class MatchHTML {

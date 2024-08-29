@@ -1,6 +1,6 @@
-package com.skahhong.playground.dsaj;
+package com.skahhong.playground.ice1.dsaj.arrays;
 
-import com.skahhong.playground.datastructures.SinglyLinkedList;
+import com.skahhong.playground.ice1.net.datastructures.SinglyLinkedList;
 
 public class ScoreboardSinglyLinkedList {
     private int numEntries = 0;

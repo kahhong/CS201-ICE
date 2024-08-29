@@ -1,8 +1,8 @@
-package com.skahhong.playground.dsaj;
+package com.skahhong.playground.ice2.dsaj.stacks;
 
 import java.util.Scanner;
-import com.skahhong.playground.datastructures.Stack;
-import com.skahhong.playground.datastructures.LinkedStack;
+import com.skahhong.playground.ice1.net.datastructures.Stack;
+import com.skahhong.playground.ice1.net.datastructures.LinkedStack;
 
 public class InsertLeft {
   public static void main(String[] args) {
