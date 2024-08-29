@@ -172,6 +172,33 @@ public class SinglyLinkedList<E> implements Cloneable {
     return answer;
   }
 
+  public E removeAt(int index) throws IndexOutOfBoundsException {
+    if(isEmpty()) return null;
+    if(index >= size) {throw new IndexOutOfBoundsException("Invalid index");}
+
+    if(index == 0) {
+      E answer = first();
+      removeFirst();
+      return answer;
+    }
+
+    if(index == size - 1) {
+      E answer = last();
+      removeLast();
+      return answer;
+    }
+
+    int count = 0;
+    Node<E> walk = head;
+    while(count != index - 1) {
+      walk = walk.getNext();
+      count++;
+    }
+    E answer = walk.getNext().getElement();
+    walk.next = walk.getNext().getNext();
+    return answer;
+  }
+
   /**
    * Removes and returns the last element of the list.
    * @return the removed element (or null if empty)

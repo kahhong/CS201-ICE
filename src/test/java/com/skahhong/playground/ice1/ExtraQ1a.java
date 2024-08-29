@@ -39,7 +39,8 @@ public class ExtraQ1a {
             System.out.println(" Scoreboard: " + highscores);
         }
 
-        assertThat(highscores.toString()).isEqualTo("((Mike, 1105), (Rob, 750), (Jill, 740), (Paul, 720), (Anna, 660))");
+        assertThat(highscores.remove(1)).isExactlyInstanceOf(GameEntry.class).asString().isEqualTo("(Rob, 750)");
+        assertThat(highscores.toString()).isEqualTo("((Mike, 1105), (Jill, 740), (Paul, 720), (Anna, 660))");
     }
 
     @Test

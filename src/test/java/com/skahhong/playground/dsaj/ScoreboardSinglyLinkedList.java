@@ -50,6 +50,11 @@ public class ScoreboardSinglyLinkedList {
         }
     }
 
+    public GameEntry remove(int indexToRemove) {
+        return board.removeAt(indexToRemove);
+    }
+
+
     public String toString() {
         return board.toString();
     }
