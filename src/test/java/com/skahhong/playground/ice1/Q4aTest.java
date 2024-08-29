@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-public class Q4a {
+public class Q4aTest {
 
     public int findRepeated(int[] input) {
         if(input.length < 6) return 0;

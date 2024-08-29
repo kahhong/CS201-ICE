@@ -1,8 +1,8 @@
 package com.skahhong.playground.ice2.dsaj.stacks;
 
 import java.util.Scanner;
-import com.skahhong.playground.ice1.net.datastructures.Stack;
-import com.skahhong.playground.ice1.net.datastructures.LinkedStack;
+import com.skahhong.playground.ice2.net.datastructures.LinkedStack;
+import com.skahhong.playground.ice2.net.datastructures.Stack;
 
 public class Evaluate {
   public static void main(String[] args) {

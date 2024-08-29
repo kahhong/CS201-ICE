@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-public class Q5 {
+public class Q5Test {
 
     public int[][][] addTwo3DArrays(int[][][] arr1, int[][][] arr2) {
         int[][][] sum = new int[arr1.length][arr1[0].length][arr1[0][0].length];

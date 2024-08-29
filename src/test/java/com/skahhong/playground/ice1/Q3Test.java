@@ -1,6 +1,6 @@
 package com.skahhong.playground.ice1;
 
-public class Q3 {
+public class Q3Test {
 //    public E getMiddle() {
 //        if(head == null) return null;
 //

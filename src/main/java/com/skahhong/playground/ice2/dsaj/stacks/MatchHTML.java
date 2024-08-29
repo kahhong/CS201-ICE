@@ -22,9 +22,10 @@
  */
 package com.skahhong.playground.ice2.dsaj.stacks;
 
+import com.skahhong.playground.ice2.net.datastructures.LinkedStack;
+import com.skahhong.playground.ice2.net.datastructures.Stack;
+
 import java.util.Scanner;
-import com.skahhong.playground.ice1.net.datastructures.Stack;
-import com.skahhong.playground.ice1.net.datastructures.LinkedStack;
 
 /** Simplified test of matching tags in an HTML document. */
 public class MatchHTML {
