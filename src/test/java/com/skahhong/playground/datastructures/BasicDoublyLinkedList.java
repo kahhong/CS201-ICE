@@ -1,4 +1,4 @@
-package com.skahhong.playground.ice1.datastructures;
+package com.skahhong.playground.datastructures;
 
 public class BasicDoublyLinkedList<E> {
 

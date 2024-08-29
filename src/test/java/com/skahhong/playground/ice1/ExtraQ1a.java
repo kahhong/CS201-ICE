@@ -1,7 +1,7 @@
 package com.skahhong.playground.ice1;
 
-import com.skahhong.playground.ice1.dsaj.GameEntry;
-import com.skahhong.playground.ice1.dsaj.ScoreboardSinglyLinkedList;
+import com.skahhong.playground.dsaj.GameEntry;
+import com.skahhong.playground.dsaj.ScoreboardSinglyLinkedList;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

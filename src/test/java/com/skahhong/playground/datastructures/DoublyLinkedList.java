@@ -1,5 +1,34 @@
-package com.skahhong.playground.ice1.datastructures;
+/*
+ * Copyright 2014, Michael T. Goodrich, Roberto Tamassia, Michael H. Goldwasser
+ *
+ * Developed for use with the book:
+ *
+ *    Data Structures and Algorithms in Java, Sixth Edition
+ *    Michael T. Goodrich, Roberto Tamassia, and Michael H. Goldwasser
+ *    John Wiley & Sons, 2014
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package com.skahhong.playground.datastructures;
 
+/**
+ * A basic doubly linked list implementation.
+ *
+ * @author Michael T. Goodrich
+ * @author Roberto Tamassia
+ * @author Michael H. Goldwasser
+ */
 public class DoublyLinkedList<E> {
 
   //---------------- nested Node class ----------------
@@ -63,9 +92,12 @@ public class DoublyLinkedList<E> {
      */
     public void setNext(Node<E> n) { next = n; }
   } //----------- end of nested Node class -----------
- 
+
+  // instance variables of the DoublyLinkedList
+  /** Sentinel node at the beginning of the list */
   private Node<E> header;                    // header sentinel
 
+  /** Sentinel node at the end of the list */
   private Node<E> trailer;                   // trailer sentinel
 
   /** Number of elements in the list (not including sentinels) */
@@ -84,7 +116,6 @@ public class DoublyLinkedList<E> {
    * @return number of elements in the linked list
    */
   public int size() { return size; }
-
 
   /**
    * Tests whether the linked list is empty.
@@ -191,15 +222,4 @@ public class DoublyLinkedList<E> {
     sb.append(")");
     return sb.toString();
   }
-
-  public static void main(String[] args){
-    DoublyLinkedList<Integer> myList = new DoublyLinkedList<Integer>();
-    myList.addLast(96);
-    myList.addFirst(65);
-    myList.addFirst(25);
-    //myList.removeFirst();
-    myList.addLast(11);
-    System.out.println(myList);
-  }
-
 } //----------- end of DoublyLinkedList class -----------

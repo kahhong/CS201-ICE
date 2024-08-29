@@ -16,17 +16,17 @@ public class Q4a {
             Number of additions: n - 5
             Number of comparisons: n - 5 + 1 = n - 4
          */
-//        int sumOfAllRunningNumbers = 0;
-//        for(int i = 1; i <= length - 5; i++) {
-//
-//            sumOfAllRunningNumbers += i;
-//        }
+        int sumOfAllRunningNumbers = 0;
+        for(int i = 1; i <= length - 5; i++) {
+
+            sumOfAllRunningNumbers += i;
+        }
 
 
         /*
             Using the Arithmetic Series Formula
          */
-        int sumOfAllRunningNumbers = ( length - 4 ) * (length - 5) / 2;
+//        int sumOfAllRunningNumbers = ( length - 4 ) * (length - 5) / 2;
 
 
         /*
